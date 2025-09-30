@@ -2,15 +2,16 @@ import {
   Account,
   Avatars,
   Client,
+  ExecutionMethod,
   Functions,
   Graphql,
+  ID,
   Locale,
   Messaging,
-  TablesDB,
+  type Models,
   Storage,
-  Teams,
-  ExecutionMethod,
-  type Models, ID
+  TablesDB,
+  Teams
 } from "appwrite"
 import { ClientType } from "./types";
 
@@ -77,13 +78,7 @@ export class SharedClient<T extends ClientType> {
   }
 
   get avatars() {
-    const avatars = new Avatars(this.client)
-
-    return {
-      get raw() {
-        return avatars
-      }
-    }
+    return new Avatars(this.client)
   }
 
   get functions() {
