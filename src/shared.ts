@@ -9,11 +9,12 @@ import {
   TablesDB,
   Storage,
   Teams,
-  ExecutionMethod
+  ExecutionMethod,
+  type Models, ID
 } from "appwrite"
-import { SharedClientType } from "./types";
+import { ClientType } from "./types";
 
-export class SharedClient<T extends SharedClientType> {
+export class SharedClient<T extends ClientType> {
   private readonly COOKIE: `a_session_${string}`
 
   public client: Client
@@ -156,10 +157,104 @@ export class SharedClient<T extends SharedClientType> {
 
   get db() {
     const db = new TablesDB(this.client)
+    type Databases = T extends { Databases: Record<string, any> } ? keyof T["Databases"] : string
+    type Tables<DB extends Databases> = T extends { Databases: Record<DB, Record<string, any>> } ? keyof T["Databases"][DB] : string
+    type Row<DB extends Databases, TB extends Tables<DB>> = T extends { Databases: Record<DB, Record<TB, Record<string, any>>> } ? T["Databases"][DB][TB] : Record<string, any>
 
     return {
       get raw() {
         return db
+      },
+
+      listRows<DB extends Databases, TB extends Tables<DB>>(database: Databases, table: TB, queries?: string[]) {
+        return db.listRows<Row<DB, TB> & Models.Row>({
+          databaseId: database,
+          tableId: table as string,
+          queries
+        })
+      },
+
+      getRow<DB extends Databases, TB extends Tables<DB>>(database: Databases, table: TB, row: string, queries?: string[]) {
+        return db.getRow<Row<DB, TB> & Models.Row>({
+          databaseId: database,
+          tableId: table as string,
+          rowId: row,
+          queries
+        })
+      },
+
+      createRow<DB extends Databases, TB extends Tables<DB>>(database: Databases, table: TB, data: Row<DB, TB>, permissions?: string[]) {
+        return db.createRow({
+          databaseId: database,
+          tableId: table as string,
+          rowId: ID.unique(),
+          data,
+          permissions
+        }) as Promise<Row<DB, TB> & Models.Row>
+      },
+
+      updateRow<DB extends Databases, TB extends Tables<DB>>(database: Databases, table: TB, id: string, data: Partial<Row<DB, TB>> | Row<DB, TB>, permissions?: string[]) {
+        return db.updateRow({
+          databaseId: database,
+          tableId: table as string,
+          rowId: id,
+          data,
+          permissions
+        }) as Promise<Row<DB, TB> & Models.Row>
+      },
+
+      async deleteRow<DB extends Databases, TB extends Tables<DB>>(database: DB, table: TB, id: string) {
+        await db.deleteRow({
+          databaseId: database,
+          tableId: table as string,
+          rowId: id
+        })
+      },
+
+      upsertRow<DB extends Databases, TB extends Tables<DB>>(database: DB, table: TB, id: string, data: Partial<Row<DB, TB>> | Row<DB, TB>, permissions?: string[]) {
+        return db.upsertRow({
+          databaseId: database,
+          tableId: table as string,
+          rowId: id,
+          data,
+          permissions
+        }) as Promise<Row<DB, TB> & Models.Row>
+      },
+
+      decrementRowColumn<DB extends Databases, TB extends Tables<DB>>(params: {
+        database: DB,
+        table: TB,
+        id: string,
+        column: keyof Row<DB, TB>,
+        value?: number,
+        min?: number
+      }) {
+        return db.decrementRowColumn<Row<DB, TB> & Models.Row>({
+          databaseId: params.database,
+          tableId: params.table as string,
+          rowId: params.id,
+          column: params.column as string,
+          value: params.value,
+          min: params.min
+        })
+      },
+
+      incrementRowColumn<DB extends Databases, TB extends Tables<DB>>(params: {
+        database: DB,
+        table: TB,
+        id: string,
+        column: keyof Row<DB, TB>,
+        value?: number,
+        max?: number
+      }) {
+        return db.incrementRowColumn<Row<DB, TB> & Models.Row>({
+          databaseId: params.database,
+          tableId: params.table as string,
+          rowId: params.id,
+          column: params.column as string,
+          value: params.value,
+          max: params.max
+        })
       }
     }
   }
