@@ -1,10 +1,11 @@
 {
   "name": "appwrite-sveltekit",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.1",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
   "scripts": {
-    "build": "tsc"
+    "build": "tsup"
   },
   "dependencies": {
     "@sveltejs/kit": "^2.43.5",
@@ -12,7 +13,7 @@
     "node-appwrite": "^19.1.0"
   },
   "devDependencies": {
+    "tsup": "^8.5.0",
     "typescript": "^5.5.3"
-  },
-  "private": true
+  }
 }
