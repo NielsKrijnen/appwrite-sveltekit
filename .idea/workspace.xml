@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a1222d1-0b41-45a5-883e-a5ff2fd65fe1" name="Changes" comment="Introduce advanced AdminClient functionality with token and user management. Simplify shared client avatar handling.">
-      <change afterPath="$PROJECT_DIR$/tsup.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
+    <list default="true" id="8a1222d1-0b41-45a5-883e-a5ff2fd65fe1" name="Changes" comment="Introduce `AdminClient` export, configure `tsup` for builds, and update package details.">
+      <change afterPath="$PROJECT_DIR$/.npmignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +78,7 @@
       <option name="presentableId" value="Default" />
       <updated>1759239862829</updated>
       <workItem from="1759239863855" duration="6995000" />
-      <workItem from="1759756042326" duration="197000" />
+      <workItem from="1759756042326" duration="252000" />
     </task>
     <task id="LOCAL-00001" summary="Initialize project with SvelteKit, Appwrite SDKs, and TypeScript setup.">
       <option name="closed" value="true" />
@@ -108,7 +104,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759264435647</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Introduce `AdminClient` export, configure `tsup` for builds, and update package details.">
+      <option name="closed" value="true" />
+      <created>1759756277194</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1759756277194</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -118,6 +122,7 @@
     <MESSAGE value="Initialize project with SvelteKit, Appwrite SDKs, and TypeScript setup." />
     <MESSAGE value="Enhance shared client with database operations and introduce AdminClient class scaffolding." />
     <MESSAGE value="Introduce advanced AdminClient functionality with token and user management. Simplify shared client avatar handling." />
-    <option name="LAST_COMMIT_MESSAGE" value="Introduce advanced AdminClient functionality with token and user management. Simplify shared client avatar handling." />
+    <MESSAGE value="Introduce `AdminClient` export, configure `tsup` for builds, and update package details." />
+    <option name="LAST_COMMIT_MESSAGE" value="Introduce `AdminClient` export, configure `tsup` for builds, and update package details." />
   </component>
 </project>
